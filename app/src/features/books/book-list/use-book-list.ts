@@ -2,7 +2,6 @@ import React from 'react';
 import { BooksCollection } from './book.interface';
 import { useBookSearchStore } from '../book-search';
 import config from '@/config';
-import { filterBooks } from './book-list.utils';
 
 export default function useBookList() {
   const { search } = useBookSearchStore();
@@ -11,17 +10,18 @@ export default function useBookList() {
 
   React.useEffect(() => {
     let debounceTimer: NodeJS.Timeout;
+
     const fetchBooks = async () => {
       setIsLoading(true);
 
       try {
-        const response = await fetch(`${config.BASE_URL}/books`);
+        const response = await fetch(
+          `${config.BASE_URL}/books?title=${search}`,
+        );
 
         const allBooks: BooksCollection = await response.json();
 
-        const filteredBooks = filterBooks(allBooks, search);
-
-        setData(filteredBooks);
+        setData(allBooks);
 
         setIsLoading(false);
       } catch (error) {

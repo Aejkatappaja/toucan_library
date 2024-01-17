@@ -21,8 +21,17 @@ const getBooksFromCSV = (filePath: string): Promise<BooksCollection> => {
   });
 };
 
+const filteredBooks = (books: BooksCollection, title: string) => {
+  return title.length > 2
+    ? books.filter((book) =>
+        book.title.toLowerCase().includes(title.toLowerCase())
+      )
+    : books;
+};
+
 const service = {
   getBooksFromCSV,
+  filteredBooks,
 };
 
 export default service;

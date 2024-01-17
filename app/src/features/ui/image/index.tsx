@@ -16,8 +16,10 @@ export const Image: React.FC<ImageProps> = ({
       {...props}
       src={props.src}
       width={props.width}
+      height={props.width}
       alt={`${props.src}-image`}
       className={`${props.className} ${style}`}
+      loading='lazy'
     />
   );
 };

@@ -12,7 +12,7 @@ export const BookList: React.FC = (): JSX.Element => {
   const displayResult = `${results} ${results_label}`;
 
   return (
-    <section className='bg-toucan grid min-h-screen grid-cols-1 gap-8 border-black px-6 pb-12 pt-32 md:grid-cols-2'>
+    <section className='bg-toucan grid min-h-screen grid-cols-1 gap-8 border-black px-6 pb-12 pt-28 md:grid-cols-2'>
       {isLoading ? (
         <Loader />
       ) : (

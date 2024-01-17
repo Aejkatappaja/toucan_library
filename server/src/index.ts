@@ -15,7 +15,7 @@ app.use(cors({ credentials: true }));
 app.use(bookRouter);
 
 app.get("/", (req: Request, res: Response) => {
-  return res.send("Welcome to Toucan Books API !");
+  return res.send("Welcome to Toucan Library API!");
 });
 
 app.all("*", (req: Request, res: Response) => {
