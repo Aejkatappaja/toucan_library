@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .bg-toucan {
+    @apply from-toucan_light_green to-toucan_primary_green bg-gradient-to-b;
+  }
+}
