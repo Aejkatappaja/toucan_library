@@ -2,6 +2,8 @@ import fs from "fs";
 
 import csvParser from "csv-parser";
 import { BooksCollection, Book } from "./data/data.types";
+import Fuse from "fuse.js";
+import { FuzzySearchRequiredInfos } from "./books.service.types";
 
 const getBooksFromCSV = (filePath: string): Promise<BooksCollection> => {
   return new Promise((resolve, reject) => {
@@ -29,8 +31,20 @@ const filteredBooks = (books: BooksCollection, title: string) => {
     : books;
 };
 
+const fuzzyFilteredBooks = ({
+  books,
+  options,
+  title,
+}: FuzzySearchRequiredInfos): BooksCollection => {
+  const fuse = new Fuse(books, options);
+  const fuzzySearchResults = fuse.search(title);
+  const filteredResult = fuzzySearchResults.map((result) => result.item);
+  return filteredResult;
+};
+
 const service = {
   getBooksFromCSV,
+  fuzzyFilteredBooks,
   filteredBooks,
 };
 

@@ -25,7 +25,17 @@ const getBooks = async (
       return;
     }
 
-    const filteredBooks = service.filteredBooks(books, title);
+    const options = {
+      keys: ["title"],
+      includeScore: true,
+      threshold: 0.4,
+    };
+
+    const filteredBooks = service.fuzzyFilteredBooks({
+      books,
+      options,
+      title,
+    });
 
     res.status(200).json(filteredBooks);
   } catch (error: unknown) {

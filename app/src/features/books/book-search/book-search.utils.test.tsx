@@ -1,21 +1,21 @@
-import { test, assert } from 'vitest';
-import { render, fireEvent } from '@testing-library/react';
-import { useBookSearchStore } from './book-search.store';
 import { useSearchHandler } from './book-search.utils';
+import * as BookSearchStoreModule from './book-search.store';
 
-test('useSearchHandler updates search in store', () => {
-  const TestComponent = () => {
+jest.mock('./book-search.store');
+
+describe('useSearchHandler', () => {
+  it('should set search value when handleSearch is called', () => {
+    const setSearchMock = jest.fn();
+    jest.spyOn(BookSearchStoreModule, 'useBookSearchStore').mockReturnValue({
+      setSearch: setSearchMock,
+    });
+
     const handleSearch = useSearchHandler();
-    return <input onChange={handleSearch} />;
-  };
 
-  const { container } = render(<TestComponent />);
-  const input = container.querySelector('input');
+    handleSearch({
+      target: { value: 'test' },
+    } as React.ChangeEvent<HTMLInputElement>);
 
-  if (input) {
-    fireEvent.change(input, { target: { value: 'test' } });
-    assert.equal(useBookSearchStore.getState().search, 'test');
-  } else {
-    assert.fail('Input element not found');
-  }
+    expect(setSearchMock).toHaveBeenCalledWith('test');
+  });
 });

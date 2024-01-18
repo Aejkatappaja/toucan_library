@@ -5,7 +5,6 @@ import { Loader } from '@/features/ui';
 
 export const BookList: React.FC = (): JSX.Element => {
   const { data, isLoading } = useBookList();
-  console.log(data);
 
   const results = data.length;
   const results_label = results > 1 ? 'Résultats' : 'Résultat';
