@@ -5,7 +5,7 @@ import config from '@/config';
 
 export default function useBookList() {
   const { search } = useBookSearchStore();
-  const [isLoading, setIsLoading] = React.useState<boolean>();
+  const [isLoading, setIsLoading] = React.useState<boolean>(true);
   const [data, setData] = React.useState<BooksCollection | []>([]);
 
   React.useEffect(() => {
