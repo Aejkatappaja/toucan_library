@@ -22,8 +22,6 @@ export default function useBookList() {
         const allBooks: BooksCollection = await response.json();
 
         setData(allBooks);
-
-        setIsLoading(false);
       } catch (error) {
         console.error(error);
       } finally {
